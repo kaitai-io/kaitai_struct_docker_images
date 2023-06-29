@@ -1,0 +1,6 @@
+#!/bin/sh -ef
+
+mkdir -p 4img
+cp ../prepare 4img
+docker build -t java-temurin17-linux-x86_64 .
+
