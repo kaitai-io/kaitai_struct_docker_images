@@ -20,4 +20,4 @@ IMG_NAME="kaitai-$TARGET-$REST"
 
 mkdir -p 4img
 rsync -av ../_common/ 4img
-docker build -t "$IMG_NAME" --label kaitai.ci=true .
+docker build -t "$IMG_NAME" --label io.kaitai.ci=true .
