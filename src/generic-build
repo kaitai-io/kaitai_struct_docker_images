@@ -4,7 +4,7 @@
 #
 # 1. Prepares everything in 4img/ dir where Dockerfile is
 # 2. Copies everything from target's `_common` to this 4img/ dir
-# 3. 
+# 3. Runs docker build with image name determined from path
 
 # Detect location first
 if [ ! -f ../../../LICENSE ]; then
@@ -20,4 +20,4 @@ IMG_NAME="kaitai-$TARGET-$REST"
 
 mkdir -p 4img
 rsync -av ../_common/ 4img
-docker build -t "$IMG_NAME" .
+docker build -t "$IMG_NAME" --label kaitai.ci=true .
