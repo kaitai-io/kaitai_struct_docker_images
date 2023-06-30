@@ -6,22 +6,37 @@ on:
       - master
 
 jobs:
-  java-temurin11-linux-x86_64:
+  build-and-publish:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image:
+          - target: java
+            rest: temurin11-linux-x86_64
+          - target: java
+            rest: temurin17-linux-x86_64
+          - target: ruby
+            rest: 1.9-linux-x86_64
+          - target: ruby
+            rest: 3.2-linux-x86_64
 
     steps:
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
       - name: checkout
         uses: actions/checkout@v3
       - name: build
         run: |
-          cd src/java/temurin11-linux-x86_64
+          cd "src/${{ matrix.image.target }}/${{ matrix.image.rest }}"
           ./build
       - name: login
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: tag
         run: |
-          docker tag kaitai-java-temurin11-linux-x86_64 ghcr.io/kaitai-io/kaitai-java-temurin11-linux-x86_64:latest
+          docker tag "kaitai-${{ matrix.image.name }}-${{ matrix.image.rest }}" "ghcr.io/kaitai-io/kaitai-${{ matrix.image.target }}-${{ matrix.image.rest }}:latest"
       - name: publish
         run: |
-          docker push ghcr.io/kaitai-io/kaitai-java-temurin11-linux-x86_64:latest
+          docker push "ghcr.io/kaitai-io/kaitai-${{ matrix.image.target }}-${{ matrix.image.rest }}:latest"
