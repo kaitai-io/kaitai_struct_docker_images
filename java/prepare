@@ -1,5 +1,9 @@
 #!/bin/sh -ef
 
+# Install Ruby to be able to run tests infrastructure
+apt-get update
+apt-get install -y ruby
+
 # Java: poor man's maven implementation in 3 lines :)
 mkdir -p "$HOME/.m2/repository/org/testng/testng/6.9.10" "$HOME/.m2/repository/com/beust/jcommander/1.48"
 wget -O "$HOME/.m2/repository/org/testng/testng/6.9.10/testng-6.9.10.jar" https://jcenter.bintray.com/org/testng/testng/6.9.10/testng-6.9.10.jar
