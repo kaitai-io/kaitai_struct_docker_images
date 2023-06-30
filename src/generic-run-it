@@ -1,0 +1,18 @@
+#!/bin/sh -ef
+
+# Generic ./run-it script that determines image name by where it's called from and launches interactive shell in a relevant image.
+
+# Detect location first
+if [ ! -f ../../../LICENSE ]; then
+	echo 'This script has to be ran as `./run-it` from `src/$TARGET/$IMPLEMENTATION-$OS-$ARCH` dir.'
+	exit 1
+fi
+
+ALL=$(pwd | sed 's,^.*/src/,,')
+TARGET=$(echo "$ALL" | cut -d/ -f1)
+REST=$(echo "$ALL" | cut -d/ -f2)
+
+# Determine image name from determined location
+IMG_NAME="kaitai-$TARGET-$REST"
+
+docker run --rm -it "$IMG_NAME" /bin/bash

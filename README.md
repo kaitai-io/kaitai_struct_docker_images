@@ -39,16 +39,16 @@ aware of the following variables:
 Therefore, accumulating all this, ultimately name of the Docker container
 will be structured as:
 
-    $TARGET$SUBTARGET-$IMPLEMENTATION-$OS-$ARCH
+    kaitai-$TARGET$SUBTARGET-$IMPLEMENTATION-$OS-$ARCH
 
 for example:
 
-    php-7.1-linux-x86_64
-    cpp_stl_98-msvc141-windows-x64
-    cpp_stl_11-clang7.3-macos-arm64
-    csharp-netcore2.2.103-linux-x86_64
-    javascript-nodejs16-linux-x86_64
-    java-temurin11-linux-x86_64
+    kaitai-php-7.1-linux-x86_64
+    kaitai-cpp_stl_98-msvc141-windows-x64
+    kaitai-cpp_stl_11-clang7.3-macos-arm64
+    kaitai-csharp-netcore2.2.103-linux-x86_64
+    kaitai-javascript-nodejs16-linux-x86_64
+    kaitai-java-temurin11-linux-x86_64
 
 Sources for these containers will be found in this repository in:
 
@@ -59,9 +59,17 @@ Sources for these containers will be found in this repository in:
 * `$TARGET` MUST match `-t` / `--target` of the compiler.
 * `$SUBTARGET` matches sum of certain Kaitai Struct compiler options.
 * `$TARGET$SUBTARGET` is used for naming:
-  * Dirs in `compiled/` directory resulting from a run in [tests repo](???)
+  * Dirs in `compiled/` directory resulting from a run in [tests repo](https://github.com/kaitai-io/kaitai_struct_tests)
   * Dirs in [`compiled/` directory](https://github.com/kaitai-io/ci_targets/tree/master/compiled) in [ci_targets repo](https://github.com/kaitai-io/ci_targets)
 * `$TARGET$SUBTARGET/$VARIETY` is used for naming branches in [ci_artifacts](https://github.com/kaitai-io/ci_artifacts)
+
+## How to use
+
+Go to [tests repo](https://github.com/kaitai-io/kaitai_struct_tests) and launch `./docker-ci`, e.g.:
+
+```
+./docker-ci -t java -i temurin11
+```
 
 ## Further reading
 

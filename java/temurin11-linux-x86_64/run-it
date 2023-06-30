@@ -1,4 +1,0 @@
-#!/bin/sh -ef
-
-docker run -it java-temurin11-linux-x86_64 /bin/bash
-
