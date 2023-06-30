@@ -1,0 +1,27 @@
+name: Docker build and publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  java-temurin11-linux-x86_64:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: build
+        run: |
+          cd src/java/temurin11-linux-x86_64
+          ./build
+      - name: login
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: tag
+        run: |
+          docker tag kaitai-java-temurin11-linux-x86_64 ghcr.io/kaitai-io/kaitai-java-temurin11-linux-x86_64:latest
+      - name: publish
+        run: |
+          docker push ghcr.io/kaitai-io/kaitai-java-temurin11-linux-x86_64:latest
