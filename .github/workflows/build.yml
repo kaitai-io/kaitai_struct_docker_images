@@ -17,6 +17,8 @@ jobs:
             implementation: temurin17
           - target: python
             implementation: 2.7
+          - target: python
+            implementation: 3.11
           - target: ruby
             implementation: 1.9
           - target: ruby
