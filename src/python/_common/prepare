@@ -1,0 +1,9 @@
+#!/bin/sh -ef
+
+# Python dependencies
+python -m pip install enum34 unittest-xml-reporting
+
+# Ruby is necessary for CI infrastructure
+apk add --no-cache \
+	ruby \
+	ruby-json
