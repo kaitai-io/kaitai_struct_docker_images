@@ -16,6 +16,12 @@ jobs:
           - target: java
             implementation: temurin17
           - target: javascript
+            implementation: nodejs4
+          - target: javascript
+            implementation: nodejs8
+          - target: javascript
+            implementation: nodejs12
+          - target: javascript
             implementation: nodejs18
           - target: python
             implementation: 2.7
