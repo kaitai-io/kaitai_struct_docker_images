@@ -15,4 +15,4 @@ REST=$(echo "$ALL" | cut -d/ -f2)
 # Determine image name from determined location
 IMG_NAME="kaitai-$TARGET-$REST"
 
-docker run --rm -it "$IMG_NAME" /bin/bash
+docker run --rm -it "$IMG_NAME" /bin/sh
