@@ -11,6 +11,8 @@ jobs:
     strategy:
       matrix:
         image:
+          - target: cpp_stl
+            implementation: gcc11
           - target: java
             implementation: temurin11
           - target: java
