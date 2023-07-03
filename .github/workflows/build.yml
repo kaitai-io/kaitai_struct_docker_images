@@ -12,6 +12,8 @@ jobs:
       matrix:
         image:
           - target: cpp_stl
+            implementation: gcc4.8
+          - target: cpp_stl
             implementation: gcc11
           - target: java
             implementation: temurin11
