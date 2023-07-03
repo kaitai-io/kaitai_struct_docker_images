@@ -5,10 +5,11 @@ COPY 4img/* ./
 
 # Install all dependencies
 RUN ./prepare
+RUN ./prepare-alpine-ruby
 
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ python --version
-# Python 2.7.18
+# Python 3.11.4
 
 RUN ./validate '^Python 3\.11\.'

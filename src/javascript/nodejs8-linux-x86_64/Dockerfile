@@ -7,6 +7,7 @@ WORKDIR /app
 
 # Install all dependencies
 RUN /prepare
+RUN /prepare-alpine-ruby
 
 # Validate that we've got correct version, e.g. something like this:
 #
