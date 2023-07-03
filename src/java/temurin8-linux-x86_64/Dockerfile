@@ -4,7 +4,7 @@ FROM eclipse-temurin:8
 COPY 4img/* ./
 
 # Install all dependencies
-RUN ./prepare-ruby
+RUN ./prepare-apt-ruby
 RUN ./prepare-java-deps
 
 # Validate that we've got correct version, e.g. something like this:
