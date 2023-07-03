@@ -19,5 +19,12 @@ REST=$(echo "$ALL" | cut -d/ -f2)
 IMG_NAME="kaitai-$TARGET-$REST"
 
 mkdir -p 4img
+rsync -av ../../_common/ 4img
 rsync -av ../_common/ 4img
+
+# If there's extra prebuild script, execute it before launching the build
+if [ -f prebuild ]; then
+	. ./prebuild
+fi
+
 docker build -t "$IMG_NAME" --label io.kaitai.ci=true .
