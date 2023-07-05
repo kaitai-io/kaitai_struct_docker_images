@@ -1,0 +1,15 @@
+FROM python:3.4-alpine
+
+# Copy files common for all images
+COPY 4img/* ./
+
+# Install all dependencies
+RUN ./prepare
+RUN ./prepare-alpine-ruby
+
+# Validate that we've got correct version, e.g. something like this:
+#
+# $ python --version
+# Python 3.4.10
+
+RUN ./validate '^Python 3\.4\.'
