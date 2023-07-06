@@ -4,7 +4,7 @@ FROM azul/zulu-openjdk-alpine:7
 COPY 4img/* ./
 
 # Install all dependencies
-RUN ./prepare-alpine-ruby
+RUN ./prepare-alpine-init && ./prepare-alpine-ruby && ./prepare-alpine-uninit
 RUN ./prepare-java-deps
 
 # Validate that we've got correct version, e.g. something like this:

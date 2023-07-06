@@ -1,0 +1,3 @@
+#!/bin/sh -ef
+
+apk update

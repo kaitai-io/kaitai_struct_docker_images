@@ -1,7 +1,6 @@
 #!/bin/sh -ef
 
 # Ruby is necessary for CI infrastructure
-apk update
 apk add \
 	ruby \
 	ruby-json
@@ -11,6 +10,3 @@ if ! echo 'require "rexml/document"' | ruby; then
 	echo "no rexml/document detected, installing"
 	apk add ruby-rexml
 fi
-
-# Cleanup apk cache
-rm -rf /var/cache/apk/*
