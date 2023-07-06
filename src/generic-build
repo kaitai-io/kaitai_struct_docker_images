@@ -20,7 +20,9 @@ IMG_NAME="kaitai-$TARGET-$REST"
 
 mkdir -p 4img
 rsync -av ../../_common/ 4img
-rsync -av ../_common/ 4img
+
+# Copy one level up common, if it exists
+[ -d ../_common ] && rsync -av ../_common/ 4img
 
 # If there's extra prebuild script, execute it before launching the build
 if [ -f prebuild ]; then
