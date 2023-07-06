@@ -1,0 +1,9 @@
+#!/bin/sh -ef
+
+if perl --version 2>&1 | grep -q "$@"; then
+	echo "Perl version confirmed."
+else
+	echo "Wrong Perl version detected!"
+	perl --version
+	false
+fi

@@ -1,0 +1,7 @@
+#!/bin/sh -ef
+
+cpanm Test::Class
+cpanm Test::Deep
+cpanm XML::Simple
+cpanm Module::Build
+cpanm TAP::Harness::JUnit
