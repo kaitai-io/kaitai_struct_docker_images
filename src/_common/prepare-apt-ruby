@@ -2,4 +2,4 @@
 
 # Install Ruby to be able to run tests infrastructure
 apt-get update
-apt-get install -y ruby
+apt-get install -y --no-install-recommends ruby
