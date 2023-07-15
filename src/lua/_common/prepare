@@ -1,0 +1,7 @@
+#!/bin/sh -ef
+
+export PATH=$PATH:$PWD/lua_install/bin
+
+# Install Lua prerequisites
+luarocks install luaunit
+luarocks install luafilesystem

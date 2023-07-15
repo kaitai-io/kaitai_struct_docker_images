@@ -1,0 +1,10 @@
+#!/bin/sh -ef
+
+export PATH=$PATH:$PWD/lua_install/bin
+if luarocks --version 2>&1 | grep -q "$@"; then
+	echo "luarocks version confirmed."
+else
+	echo "Wrong luarocks version detected!"
+	luarocks --version
+	false
+fi
