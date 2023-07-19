@@ -1,4 +1,4 @@
-#!/bin/sh -ef
+#!/bin/sh -e
 
 # Cleanup apk cache
 rm -rf /var/cache/apk/*
