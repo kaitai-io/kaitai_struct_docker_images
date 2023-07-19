@@ -12,11 +12,13 @@ jobs:
       matrix:
         image:
           - target: cpp_stl
+            implementation: clang3.4
+          - target: cpp_stl
+            implementation: clang11
+          - target: cpp_stl
             implementation: gcc4.8
           - target: cpp_stl
             implementation: gcc11
-          - target: cpp_stl
-            implementation: clang11
           - target: go
             implementation: 1.19
           - target: java
