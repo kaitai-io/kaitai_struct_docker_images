@@ -1,0 +1,6 @@
+#!/bin/sh -ef
+
+# Construct Python dependencies
+python -m pip install \
+	construct \
+	unittest-xml-reporting

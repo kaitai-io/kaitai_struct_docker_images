@@ -19,6 +19,12 @@ jobs:
             implementation: gcc4.8
           - target: cpp_stl
             implementation: gcc11
+          - target: construct
+            implementation: python2.7
+          - target: construct
+            implementation: python3.4
+          - target: construct
+            implementation: python3.11
           - target: go
             implementation: 1.19
           - target: java

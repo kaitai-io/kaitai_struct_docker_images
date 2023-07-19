@@ -1,0 +1,11 @@
+#!/bin/sh -ef
+
+VERSION=$(echo 'import construct; print(construct.__version__)' | python)
+
+if echo "$VERSION" | grep -q "$@"; then
+	echo "Construct version confirmed."
+else
+	echo "Wrong Construct version detected!"
+	echo "$VERSION"
+	false
+fi
