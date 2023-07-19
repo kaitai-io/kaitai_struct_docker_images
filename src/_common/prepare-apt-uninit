@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+# Cleanup apt cache
+rm -rf /var/lib/apt/lists/*
