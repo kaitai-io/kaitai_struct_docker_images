@@ -1,0 +1,11 @@
+#!/bin/sh -ef
+
+VERSION=$(dot -V 2>&1)
+
+if echo "$VERSION" | grep -q "$@"; then
+	echo "Graphviz version confirmed."
+else
+	echo "Graphviz version detected!"
+	echo "$VERSION"
+	false
+fi
