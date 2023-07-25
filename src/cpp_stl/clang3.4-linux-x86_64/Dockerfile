@@ -46,4 +46,4 @@ RUN \
 # Target: x86_64-pc-linux-gnu
 # Thread model: posix
 
-RUN ./validate-clang 'clang version 3.4-'
+RUN ./validate-clang 'clang version 3\.4-'
