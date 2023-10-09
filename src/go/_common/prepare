@@ -4,8 +4,7 @@ GO111MODULE=off go get -v github.com/kaitai-io/kaitai_struct_go_runtime/kaitai
 GO111MODULE=off go get -v github.com/stretchr/testify/assert
 GO111MODULE=off go get -v golang.org/x/text
 
-# install https://github.com/jstemmer/go-junit-report/releases/tag/v2.0.0-beta1
-(
-cd "$(go env GOPATH | tr ':' '\n' | tail -n1)"/bin
-curl -fsSL https://github.com/jstemmer/go-junit-report/releases/download/v2.0.0-beta1/go-junit-report-v2.0.0-beta1-linux-amd64.tar.gz | tar xzvf -
-)
+# Install https://github.com/jstemmer/go-junit-report
+curl -fsSL https://github.com/jstemmer/go-junit-report/releases/download/v2.0.0/go-junit-report-v2.0.0-linux-amd64.tar.gz | tar xzvf -
+install -t /usr/local/bin go-junit-report
+rm -f go-junit-report
