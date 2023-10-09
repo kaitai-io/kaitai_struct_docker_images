@@ -1,4 +1,4 @@
 # 4img/ directories are used within every single Dockerfile root to
 # temporary store what's necessary for
 
-4img
+4img/
