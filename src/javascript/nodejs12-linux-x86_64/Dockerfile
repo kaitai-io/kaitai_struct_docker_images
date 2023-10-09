@@ -14,4 +14,4 @@ RUN /prepare-alpine-init && /prepare-alpine-ruby && /prepare-alpine-uninit
 # $ node --version
 # v12.22.12
 
-RUN /validate '^v12\.'
+RUN ./validate '^v12\.'

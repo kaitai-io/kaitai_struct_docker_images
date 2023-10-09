@@ -14,4 +14,4 @@ RUN /prepare-alpine-init && /prepare-alpine-ruby && /prepare-alpine-uninit
 # $ node --version
 # v8.17.0
 
-RUN /validate '^v8\.'
+RUN ./validate '^v8\.'
