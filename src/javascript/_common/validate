@@ -1,9 +1,3 @@
 #!/bin/sh -ef
 
-if node --version 2>&1 | grep -q "$@"; then
-	echo "NodeJS version confirmed."
-else
-	echo "Wrong NodeJS version detected!"
-	node --version
-	false
-fi
+./validate-version Node.js "$(node --version)" "$@"

@@ -1,9 +1,3 @@
 #!/bin/sh -ef
 
-if gcc --version 2>&1 | grep -q "$@"; then
-	echo "gcc version confirmed."
-else
-	echo "Wrong gcc version detected!"
-	gcc --version
-	false
-fi
+./validate-version GCC "$(gcc --version)" "$@"

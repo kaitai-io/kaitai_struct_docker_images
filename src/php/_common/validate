@@ -1,9 +1,3 @@
 #!/bin/sh -ef
 
-if php --version 2>&1 | grep -q "$@"; then
-	echo "PHP version confirmed."
-else
-	echo "Wrong PHP version detected!"
-	php --version
-	false
-fi
+./validate-version PHP "$(php --version)" "$@"

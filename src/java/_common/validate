@@ -1,9 +1,3 @@
 #!/bin/sh -ef
 
-if java -version 2>&1 | grep -q "$@"; then
-	echo "Java version confirmed."
-else
-	echo "Wrong Java version detected!"
-	java -version
-	false
-fi
+./validate-version Java "$(java -version 2>&1)" "$@"

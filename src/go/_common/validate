@@ -1,9 +1,3 @@
 #!/bin/sh -ef
 
-if go version 2>&1 | grep -q "$@"; then
-	echo "Go version confirmed."
-else
-	echo "Wrong go version detected!"
-	go version
-	false
-fi
+./validate-version Go "$(go version)" "$@"

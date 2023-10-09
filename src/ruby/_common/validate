@@ -1,9 +1,3 @@
 #!/bin/sh -ef
 
-if ruby --version 2>&1 | grep -q "$@"; then
-	echo "Ruby version confirmed."
-else
-	echo "Wrong Ruby version detected!"
-	ruby --version
-	false
-fi
+./validate-version Ruby "$(ruby --version)" "$@"

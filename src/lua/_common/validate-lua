@@ -1,10 +1,3 @@
 #!/bin/sh -ef
 
-export PATH=$PATH:$PWD/lua_install/bin
-if lua -v 2>&1 | grep -q "$@"; then
-	echo "Lua version confirmed."
-else
-	echo "Wrong Lua version detected!"
-	lua -v
-	false
-fi
+PATH=$PATH:$PWD/lua_install/bin ./validate-version Lua "$(lua -v)" "$@"

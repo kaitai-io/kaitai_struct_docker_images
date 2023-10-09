@@ -1,9 +1,3 @@
 #!/bin/sh -ef
 
-if python --version 2>&1 | grep -q "$@"; then
-	echo "Python version confirmed."
-else
-	echo "Wrong Python version detected!"
-	python --version
-	false
-fi
+./validate-version Python "$(python --version)" "$@"

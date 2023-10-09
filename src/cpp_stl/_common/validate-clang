@@ -1,9 +1,3 @@
 #!/bin/sh -ef
 
-if clang --version 2>&1 | grep -q "$@"; then
-	echo "clang version confirmed."
-else
-	echo "Wrong clang version detected!"
-	clang --version
-	false
-fi
+./validate-version Clang "$(clang --version)" "$@"
