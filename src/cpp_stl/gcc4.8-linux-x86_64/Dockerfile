@@ -23,9 +23,9 @@ RUN apt-get install -y --no-install-recommends \
 # from using ancient cmake. Also, it's quite trivial to just build fresh
 # cmake from sources, so we do that.
 
-RUN curl -fsSL https://github.com/Kitware/CMake/releases/download/v3.26.4/cmake-3.26.4.tar.gz -o cmake-3.26.4.tar.gz
-RUN tar -xvf cmake-3.26.4.tar.gz && \
-	cd cmake-3.26.4 && \
+RUN curl -fsSL https://github.com/Kitware/CMake/releases/download/v3.27.7/cmake-3.27.7.tar.gz -o cmake-3.27.7.tar.gz
+RUN tar -xf cmake-3.27.7.tar.gz && \
+	cd cmake-3.27.7 && \
 	./bootstrap && \
 	make && \
 	make install && \
