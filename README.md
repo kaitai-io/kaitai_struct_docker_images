@@ -34,7 +34,7 @@ aware of the following variables:
 * `$ARCH`: CPU architecture we'll be running on / compiling for (use OS notation, e.g. result of `uname -m` or something similar):
   * `x86_64` (Linux, macOS), `x64` (Windows)
   * `i386` (Linux), `x86` (Windows)
-  * `arm64` (Windows, Linux
+  * `arm64` (Windows, Linux)
 
 Therefore, accumulating all this, ultimately name of the Docker container
 will be structured as:
