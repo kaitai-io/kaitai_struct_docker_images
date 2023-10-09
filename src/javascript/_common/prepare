@@ -9,17 +9,17 @@ NODEJS_VERSION=$(node --version)
 #  - v12 since v10.0
 # , so we'll be specifically using older versions
 MOCHA_VERSION=
-if echo "$NODEJS_VERSION" | grep '^v4'; then
+if echo "$NODEJS_VERSION" | grep '^v4\.'; then
 	MOCHA_VERSION="@<6"
-elif echo "$NODEJS_VERSION" | grep '^v8'; then
+elif echo "$NODEJS_VERSION" | grep '^v8\.'; then
 	MOCHA_VERSION="@<8"
-elif echo "$NODEJS_VERSION" | grep '^v10'; then
+elif echo "$NODEJS_VERSION" | grep '^v10\.'; then
 	MOCHA_VERSION="@<9"
-elif echo "$NODEJS_VERSION" | grep '^v12'; then
+elif echo "$NODEJS_VERSION" | grep '^v12\.'; then
 	MOCHA_VERSION="@<10"
 fi
 
 # Install JavaScript dependencies
-npm install --loglevel verbose \
+npm install -g --loglevel verbose \
 	"mocha$MOCHA_VERSION" \
 	iconv-lite
