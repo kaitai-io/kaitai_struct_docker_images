@@ -1,4 +1,4 @@
 #!/bin/sh -ef
 
 # Python dependencies
-python -m pip install enum34 unittest-xml-reporting
+python -m pip install unittest-xml-reporting
