@@ -4,7 +4,7 @@ FROM python:2.7-alpine
 COPY 4img/* ./
 
 # Install all dependencies
-RUN python -m pip install enum34 && ./prepare
+RUN ./prepare && python -m pip install -U enum34
 RUN ./prepare-alpine-init && ./prepare-alpine-ruby && ./prepare-alpine-uninit
 
 # Validate that we've got correct version, e.g. something like this:
