@@ -16,8 +16,8 @@ RUN apk add git
 
 RUN ./prepare-alpine-uninit
 
-# # Install rest of go-specific dependencies
-# RUN ./prepare
+# Install rest of go-specific dependencies
+RUN ./prepare
 
 # Validate that we've got correct version, e.g. something like this:
 #
