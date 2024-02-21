@@ -1,4 +1,4 @@
-FROM php:8.2
+FROM php:8.3
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -10,8 +10,8 @@ RUN ./prepare
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ php --version
-# PHP 8.2.7 (cli) (built: Jul  4 2023 14:24:49) (NTS)
+# PHP 8.3.3 (cli) (built: Feb 16 2024 20:53:43) (NTS)
 # Copyright (c) The PHP Group
-# Zend Engine v4.2.7, Copyright (c) Zend Technologies
+# Zend Engine v4.3.3, Copyright (c) Zend Technologies
 
-RUN ./validate '^PHP 8\.2\.'
+RUN ./validate '^PHP 8\.3\.'

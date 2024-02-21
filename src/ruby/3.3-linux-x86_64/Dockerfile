@@ -1,4 +1,4 @@
-FROM ruby:3.2
+FROM ruby:3.3
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -9,6 +9,6 @@ RUN ./prepare
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ ruby --version
-# ruby 3.2.2 (2023-03-30 revision e51014f9c0) [x86_64-linux]
+# ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [x86_64-linux]
 
-RUN ./validate '^ruby 3\.2\.'
+RUN ./validate '^ruby 3\.3\.'
