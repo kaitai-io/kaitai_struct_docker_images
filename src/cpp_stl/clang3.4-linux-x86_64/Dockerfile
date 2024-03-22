@@ -17,7 +17,6 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
 	g++ \
 	make \
-	libboost-test-dev \
 	zlib1g-dev \
 	valgrind \
 	curl \
@@ -25,13 +24,22 @@ RUN apt-get install -y --no-install-recommends \
 	ruby
 
 # Build and install cmake
-RUN curl -fsSL https://github.com/Kitware/CMake/releases/download/v3.27.7/cmake-3.27.7.tar.gz -o cmake-3.27.7.tar.gz
+RUN curl -fsSLO https://github.com/Kitware/CMake/releases/download/v3.27.7/cmake-3.27.7.tar.gz
 RUN tar -xf cmake-3.27.7.tar.gz && \
 	cd cmake-3.27.7 && \
 	./bootstrap && \
 	make && \
 	make install && \
 	cmake --version
+
+# Build Boost.Test from source - see
+# https://www.boost.org/doc/libs/1_84_0/libs/test/doc/html/boost_test/adv_scenarios/build_utf.html
+
+RUN curl -fsSLO https://boostorg.jfrog.io/artifactory/main/release/1.84.0/source/boost_1_84_0.tar.bz2
+RUN tar --bzip2 -xf boost_1_84_0.tar.bz2 && \
+	cd boost_1_84_0 && \
+	./bootstrap.sh --with-libraries=test && \
+	./b2 --with-test variant=debug link=shared install
 
 # Remove gcc and install clang instead
 RUN \
@@ -47,3 +55,4 @@ RUN \
 # Thread model: posix
 
 RUN ./validate-clang 'clang version 3\.4-'
+RUN ./validate-boost '^Boost 1_84$'
