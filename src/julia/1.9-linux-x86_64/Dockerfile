@@ -9,6 +9,7 @@ RUN ./prepare-apt-ruby && \
 
 WORKDIR /env
 
-# Install and precompile dependencies
+# Install dependencies
 RUN julia -e 'using Pkg; Pkg.activate("."); Pkg.add(["TestReports", "Test", "StringEncodings", "CodecZlib"]);'
+# Precompile dependencies
 RUN julia -e 'using Pkg; Pkg.instantiate();'
