@@ -1,0 +1,3 @@
+#!/bin/sh -ef
+
+./validate-version rustc "$(rustc --version)" "$@"

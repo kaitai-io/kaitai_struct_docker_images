@@ -78,6 +78,8 @@ jobs:
             implementation: '2.3'
           - target: ruby
             implementation: '3.3'
+          - target: rust
+            implementation: '1.80'
 
     steps:
       - name: Dump matrix context

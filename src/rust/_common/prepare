@@ -1,0 +1,13 @@
+#!/bin/sh -ef
+
+mkdir -p /download/runtime
+cd /download/runtime
+git clone --depth 1 https://github.com/kaitai-io/kaitai_struct_rust_runtime.git rust
+cd rust
+rustc_ver=$(rustc -vV)
+rustc_target=$(printf '%s\n' "$rustc_ver" | sed -n 's/^host: //p')
+# Download runtime library dependencies to `$CARGO_HOME`
+cargo fetch --target "$rustc_target"
+cd ..
+cp -v -t . rust/Cargo.lock
+rm -rf rust
