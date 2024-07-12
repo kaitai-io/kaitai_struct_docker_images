@@ -1,8 +1,16 @@
 #!/bin/sh -ef
 
-GO111MODULE=off go get -v github.com/kaitai-io/kaitai_struct_go_runtime/kaitai
-GO111MODULE=off go get -v github.com/stretchr/testify/assert
-GO111MODULE=off go get -v golang.org/x/text
+(
+git clone --depth 1 https://github.com/kaitai-io/kaitai_struct_go_runtime /download/runtime/go
+git -C /download/runtime/go rev-parse HEAD
+git clone --depth 1 https://github.com/kaitai-io/kaitai_struct_tests /download/tests
+cd /download/tests
+git rev-parse HEAD
+./prepare-go
+cd spec/go
+go mod download
+)
+rm -rf /download
 
 # Install https://github.com/jstemmer/go-junit-report
 curl -fsSL https://github.com/jstemmer/go-junit-report/releases/download/v2.1.0/go-junit-report-v2.1.0-linux-amd64.tar.gz | tar xzvf -

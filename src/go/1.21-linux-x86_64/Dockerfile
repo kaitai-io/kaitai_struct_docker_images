@@ -8,7 +8,7 @@ RUN ./prepare-alpine-init
 # Ruby is required for test infrastructure (aggregators, test result converters) to work
 RUN ./prepare-alpine-ruby
 
-# Required to download go-junit-report release in ./prepare-go-deps
+# Required to download go-junit-report release in ./prepare
 RUN apk add curl
 
 # Required for `go get` to work
@@ -25,3 +25,6 @@ RUN ./prepare
 # go version go1.21.3 linux/amd64
 
 RUN ./validate '^go version go1\.21\.'
+
+# Prevent Go from accessing the network (see https://go.dev/ref/mod#resolve-pkg-mod)
+ENV GOPROXY=off
