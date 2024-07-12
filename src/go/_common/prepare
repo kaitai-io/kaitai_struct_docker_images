@@ -5,6 +5,6 @@ GO111MODULE=off go get -v github.com/stretchr/testify/assert
 GO111MODULE=off go get -v golang.org/x/text
 
 # Install https://github.com/jstemmer/go-junit-report
-curl -fsSL https://github.com/jstemmer/go-junit-report/releases/download/v2.0.0/go-junit-report-v2.0.0-linux-amd64.tar.gz | tar xzvf -
+curl -fsSL https://github.com/jstemmer/go-junit-report/releases/download/v2.1.0/go-junit-report-v2.1.0-linux-amd64.tar.gz | tar xzvf -
 install -t /usr/local/bin go-junit-report
 rm -f go-junit-report
