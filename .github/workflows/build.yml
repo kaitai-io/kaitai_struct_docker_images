@@ -31,8 +31,6 @@ jobs:
           - target: graphviz
             implementation: 9
           - target: go
-            implementation: 1.21
-          - target: go
             implementation: 1.22
           - target: java
             implementation: zulu7
