@@ -35,11 +35,14 @@ RUN tar -xf cmake-3.27.7.tar.gz && \
 # Build Boost.Test from source - see
 # https://www.boost.org/doc/libs/1_84_0/libs/test/doc/html/boost_test/adv_scenarios/build_utf.html
 
-RUN curl -fsSLO https://boostorg.jfrog.io/artifactory/main/release/1.84.0/source/boost_1_84_0.tar.bz2
-RUN tar --bzip2 -xf boost_1_84_0.tar.bz2 && \
+RUN curl -fsSLO https://boostorg.jfrog.io/artifactory/main/release/1.84.0/source/boost_1_84_0.tar.bz2 && \
+	tar --bzip2 -xf boost_1_84_0.tar.bz2 && \
+	rm -f boost_1_84_0.tar.bz2 && \
 	cd boost_1_84_0 && \
 	./bootstrap.sh --with-libraries=test && \
-	./b2 --with-test variant=debug link=shared install
+	./b2 --with-test variant=debug link=shared install && \
+	cd .. && \
+	rm -rf boost_1_84_0
 
 # Remove gcc and install clang instead
 RUN \
