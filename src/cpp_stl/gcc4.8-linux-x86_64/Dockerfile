@@ -1,5 +1,7 @@
 FROM ubuntu:14.04
 
+WORKDIR /root
+
 # Copy files common for all images
 COPY 4img/* ./
 
@@ -7,27 +9,24 @@ COPY 4img/* ./
 RUN apt-get update
 
 # curl - required to download cmake
-# libssl-dev - required for cmake build
 RUN apt-get install -y --no-install-recommends \
 	g++ \
 	make \
 	zlib1g-dev \
 	valgrind \
 	curl \
-	libssl-dev \
 	ruby
 
-# Ubuntu 14.04 comes with ancient cmake 2.8.12.2-0ubuntu3. We don't
-# really want to keep supporting old cmake versions, nor we benefit anyhow
-# from using ancient cmake. Also, it's quite trivial to just build fresh
-# cmake from sources, so we do that.
+# Ubuntu 14.04 comes with ancient cmake 2.8.12.2-0ubuntu3. We don't really want
+# to keep supporting old cmake versions, nor we benefit in any way from using
+# ancient cmake. Therefore, we use a precompiled binary distribution of a recent
+# version of cmake.
 
-RUN curl -fsSLO https://github.com/Kitware/CMake/releases/download/v3.27.7/cmake-3.27.7.tar.gz
-RUN tar -xf cmake-3.27.7.tar.gz && \
-	cd cmake-3.27.7 && \
-	./bootstrap && \
-	make && \
-	make install && \
+# Download the CMake binary installer and run it
+RUN curl -fsSLO https://github.com/Kitware/CMake/releases/download/v3.27.9/cmake-3.27.9-linux-x86_64.sh && \
+	chmod u+x cmake-3.27.9-linux-x86_64.sh && \
+	./cmake-3.27.9-linux-x86_64.sh --skip-license --prefix=/usr/local --exclude-subdir && \
+	rm cmake-3.27.9-linux-x86_64.sh && \
 	cmake --version
 
 # Build Boost.Test from source - see
