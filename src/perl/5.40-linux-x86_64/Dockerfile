@@ -1,5 +1,5 @@
 # Can't use "slim" container, because we use XML-Simple, which requires gcc to build
-FROM perl:5.38
+FROM perl:5.40
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -13,9 +13,9 @@ RUN ./prepare-apt-ruby
 #
 # $ perl --version
 #
-# This is perl 5, version 38, subversion 0 (v5.38.0) built for x86_64-linux-gnu
+# This is perl 5, version 40, subversion 0 (v5.40.0) built for x86_64-linux-gnu
 #
-# Copyright 1987-2023, Larry Wall
+# Copyright 1987-2024, Larry Wall
 # ...
 
 RUN ./validate '^This is perl 5, version 38,'
