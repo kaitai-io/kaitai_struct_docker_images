@@ -18,4 +18,4 @@ RUN ./prepare-apt-ruby
 # Copyright 1987-2024, Larry Wall
 # ...
 
-RUN ./validate '^This is perl 5, version 38,'
+RUN ./validate '^This is perl 5, version 40,'
