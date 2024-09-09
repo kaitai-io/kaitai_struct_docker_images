@@ -8,11 +8,6 @@ if [ ! -f ../../../LICENSE ]; then
 	exit 1
 fi
 
-ALL=$(pwd | sed 's,^.*/src/,,')
-TARGET=$(echo "$ALL" | cut -d/ -f1)
-REST=$(echo "$ALL" | cut -d/ -f2)
+. ../../../common.sh
 
-# Determine image name from determined location
-IMG_NAME="kaitai-$TARGET-$REST"
-
-docker run --rm -it "$IMG_NAME" /bin/sh
+"$DOCKER_BIN" $EXTRA_ARGS run --rm -it "$IMG_NAME" /bin/sh

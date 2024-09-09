@@ -12,11 +12,7 @@ if [ ! -f ../../../LICENSE ]; then
 	exit 1
 fi
 
-ALL=$(pwd | sed 's,^.*/src/,,')
-TARGET=$(echo "$ALL" | cut -d/ -f1)
-REST=$(echo "$ALL" | cut -d/ -f2)
-
-IMG_NAME="kaitai-$TARGET-$REST"
+. ../../../common.sh
 
 mkdir -p 4img
 rsync -av ../../_common/ 4img
@@ -29,4 +25,4 @@ if [ -f prebuild ]; then
 	. ./prebuild
 fi
 
-docker build -t "$IMG_NAME" --label io.kaitai.ci=true .
+"$DOCKER_BIN" $EXTRA_ARGS build -t "$IMG_NAME" --label io.kaitai.ci=true .
