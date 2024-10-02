@@ -8,6 +8,10 @@ COPY 4img/* ./
 # uid/gid", see https://stackoverflow.com/a/52196681
 RUN npm config set unsafe-perm true
 
+# npm v5 seems to be the latest version compatible with Node.js 4 (found
+# experimentally).
+RUN npm install --loglevel info -g npm@latest-5
+
 # Install all dependencies
 RUN ./prepare
 RUN ./prepare-alpine-init && ./prepare-alpine-ruby && ./prepare-alpine-uninit

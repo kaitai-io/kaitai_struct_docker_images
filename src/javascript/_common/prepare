@@ -19,7 +19,48 @@ elif echo "$NODEJS_VERSION" | grep '^v12\.'; then
 	MOCHA_VERSION="@<10"
 fi
 
+npm config set loglevel verbose
+
 # Install JavaScript dependencies
-npm install -g --loglevel verbose \
+npm install -g \
 	"mocha$MOCHA_VERSION" \
 	iconv-lite
+
+# Install the runtime library. We fetch
+# https://www.npmjs.com/package/kaitai-struct/v/next and install it globally in
+# the Docker image. This means that whenever we make a change in
+# https://github.com/kaitai-io/kaitai_struct_javascript_runtime and want to test
+# it in CI, we need to follow these steps:
+#
+# 1. Publish a new version to npm with the @next tag. In practice, this just
+#    means pushing a tag in [this
+#    format](https://github.com/kaitai-io/kaitai_struct_javascript_runtime/blob/2acb0d8b09fde9c95fc77ee3019f6d6b1c73f040/.github/workflows/build.yml#L6)
+#    to GitHub, which will trigger `npm publish --tag next` automatically.
+# 2. Trigger the CI workflow in
+#    https://github.com/kaitai-io/kaitai_struct_docker_images to rebuild the
+#    JavaScript Docker images to fetch the new @next version.
+#
+# Admittedly, it's not ideal to rely on an embedded runtime library (as
+# mentioned in
+# https://github.com/kaitai-io/kaitai_struct/issues/187#issuecomment-2273725000).
+# Most Docker images can dynamically use any version of the runtime library
+# mounted at `/runtime`, which is very easy to work with. However, since the
+# JavaScript runtime library was migrated to TypeScript (see
+# https://github.com/kaitai-io/kaitai_struct_javascript_runtime/pull/25), this
+# is not so easy because the TypeScript code must first be compiled into
+# JavaScript. We may not be able to do that on old unsupported Node.js versions
+# that we're still testing on (because it requires some npm dependencies and
+# most npm packages don't work on old versions of Node.js unless you also use
+# outdated versions of those packages).
+#
+# Installing our `kaitai-struct` npm package in the Docker image is much easier.
+# If it causes problems in the future, we can come up with another solution.
+
+npm install -g \
+	kaitai-struct@next
+
+# Tell `npm` to use offline mode from now on (the
+# [`docker-ci`](https://github.com/kaitai-io/kaitai_struct_tests/blob/f831283c0b9d84eb52f6e8ec593c496b0c254854/docker-ci)
+# script runs the Docker containers with `--network none`, so if `npm` decided
+# to access the network for some reason, it would lead to errors)
+npm config set offline true
