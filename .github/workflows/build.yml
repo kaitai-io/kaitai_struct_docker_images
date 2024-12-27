@@ -23,7 +23,7 @@ jobs:
           - target: construct
             implementation: python3.6
           - target: construct
-            implementation: python3.12
+            implementation: python3.13
           - target: csharp
             implementation: net6.0
           - target: graphviz
