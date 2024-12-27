@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -17,9 +17,9 @@ RUN apt-get install -y --no-install-recommends \
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ gcc --version
-# gcc (Ubuntu 11.3.0-1ubuntu1~22.04.1) 11.3.0
-# Copyright (C) 2021 Free Software Foundation, Inc.
-# This is free software; see the source for copying conditions.  There is NO
+# gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+# Copyright (C) 2023 Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions. There is NO
 # warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-RUN ./validate-gcc '^gcc \(.*\) 11\.'
+RUN ./validate-gcc '^gcc \(.*\) 13\.'
