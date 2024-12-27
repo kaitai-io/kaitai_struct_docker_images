@@ -15,7 +15,7 @@ jobs:
           - target: cpp_stl
             implementation: clang3.4
           - target: cpp_stl
-            implementation: clang11
+            implementation: clang18
           - target: cpp_stl
             implementation: gcc4.8
           - target: cpp_stl
