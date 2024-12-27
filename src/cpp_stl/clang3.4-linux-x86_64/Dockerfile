@@ -26,10 +26,10 @@ RUN apt-get install -y --no-install-recommends \
 # version of cmake.
 
 # Download the CMake binary installer and run it
-RUN curl -fsSLO https://github.com/Kitware/CMake/releases/download/v3.27.9/cmake-3.27.9-linux-x86_64.sh && \
-	chmod u+x cmake-3.27.9-linux-x86_64.sh && \
-	./cmake-3.27.9-linux-x86_64.sh --skip-license --prefix=/usr/local --exclude-subdir && \
-	rm cmake-3.27.9-linux-x86_64.sh && \
+RUN curl -fsSLO https://github.com/Kitware/CMake/releases/download/v3.31.3/cmake-3.31.3-linux-x86_64.sh && \
+	chmod u+x cmake-3.31.3-linux-x86_64.sh && \
+	./cmake-3.31.3-linux-x86_64.sh --skip-license --prefix=/usr/local --exclude-subdir && \
+	rm cmake-3.31.3-linux-x86_64.sh && \
 	cmake --version
 
 # Build Boost.Test from source - see
