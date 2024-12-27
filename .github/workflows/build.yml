@@ -21,7 +21,7 @@ jobs:
           - target: cpp_stl
             implementation: gcc11
           - target: construct
-            implementation: python3.4
+            implementation: python3.6
           - target: construct
             implementation: python3.12
           - target: csharp
