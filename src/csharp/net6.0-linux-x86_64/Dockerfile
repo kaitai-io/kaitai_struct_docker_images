@@ -11,12 +11,4 @@ RUN ./prepare-apt-ruby && \
 ENV KAITAI_NET=netstd
 
 # Download .NET dependencies into ~/.nuget/packages
-RUN \
-	git clone https://github.com/kaitai-io/kaitai_struct_csharp_runtime /download/runtime/csharp && \
-	git clone https://github.com/kaitai-io/kaitai_struct_tests /download/tests && \
-	\
-	cd /download/tests && \
-	./run-csharp --project && \
-	dotnet restore spec/csharp/kaitai_struct_csharp_tests_netstd/kaitai_struct_csharp_tests_netstd.csproj && \
-	\
-	rm -rf /download
+RUN ./prepare
