@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.21
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -13,6 +13,6 @@ RUN \
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ dot -V
-# dot - graphviz version 9.0.0 (20230911.1827)
+# dot - graphviz version 12.2.0 (20241103.1931)
 
-RUN ./validate '^dot - graphviz version 9\.'
+RUN ./validate '^dot - graphviz version 12\.'

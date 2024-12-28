@@ -29,7 +29,7 @@ jobs:
           - target: csharp
             implementation: net9.0
           - target: graphviz
-            implementation: '9'
+            implementation: '12'
           - target: go
             implementation: '1.23'
           - target: java
