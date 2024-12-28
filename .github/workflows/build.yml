@@ -26,6 +26,8 @@ jobs:
             implementation: python3.13
           - target: csharp
             implementation: net6.0
+          - target: csharp
+            implementation: net9.0
           - target: graphviz
             implementation: '9'
           - target: go
