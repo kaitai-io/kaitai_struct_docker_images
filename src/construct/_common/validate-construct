@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version Construct "$(python -c 'import construct; print(construct.__version__)')" "$@"
+ver=$(python -c 'import construct; print(construct.__version__)')
+./validate-version Construct "$ver" "$@"

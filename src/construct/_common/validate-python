@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version Python "$(python --version 2>&1)" "$@"
+ver=$(python --version 2>&1)
+./validate-version Python "$ver" "$@"

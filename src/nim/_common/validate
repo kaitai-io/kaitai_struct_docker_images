@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version Nim "$(nim --version)" "$@"
+ver=$(nim --version)
+./validate-version Nim "$ver" "$@"

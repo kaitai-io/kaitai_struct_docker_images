@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version Clang "$(clang --version)" "$@"
+ver=$(clang --version)
+./validate-version Clang "$ver" "$@"

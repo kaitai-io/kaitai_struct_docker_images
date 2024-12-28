@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version Graphviz "$(dot -V 2>&1)" "$@"
+ver=$(dot -V 2>&1)
+./validate-version Graphviz "$ver" "$@"

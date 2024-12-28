@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version Lua "$(lua -v)" "$@"
+ver=$(lua -v)
+./validate-version Lua "$ver" "$@"

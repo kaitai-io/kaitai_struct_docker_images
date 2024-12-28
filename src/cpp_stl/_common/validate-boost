@@ -1,4 +1,5 @@
 #!/bin/sh -ef
 
 c++ -O2 -Wall -Wextra -Wpedantic -o print_boost_ver print_boost_ver.cpp
-./validate-version Boost "$(./print_boost_ver)" "$@"
+ver=$(./print_boost_ver)
+./validate-version Boost "$ver" "$@"

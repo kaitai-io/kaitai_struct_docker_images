@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version GCC "$(gcc --version)" "$@"
+ver=$(gcc --version)
+./validate-version GCC "$ver" "$@"

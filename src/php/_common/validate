@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version PHP "$(php --version)" "$@"
+ver=$(php --version)
+./validate-version PHP "$ver" "$@"

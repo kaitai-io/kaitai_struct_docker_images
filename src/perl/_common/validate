@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version Perl "$(perl --version)" "$@"
+ver=$(perl --version)
+./validate-version Perl "$ver" "$@"

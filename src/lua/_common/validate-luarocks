@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version LuaRocks "$(luarocks --version)" "$@"
+ver=$(luarocks --version)
+./validate-version LuaRocks "$ver" "$@"

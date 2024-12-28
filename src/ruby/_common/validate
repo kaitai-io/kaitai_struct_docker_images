@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version Ruby "$(ruby --version)" "$@"
+ver=$(ruby --version)
+./validate-version Ruby "$ver" "$@"

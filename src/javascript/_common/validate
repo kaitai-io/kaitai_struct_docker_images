@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version Node.js "$(node --version)" "$@"
+ver=$(node --version)
+./validate-version Node.js "$ver" "$@"

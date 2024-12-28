@@ -1,3 +1,4 @@
 #!/bin/sh -ef
 
-./validate-version Go "$(go version)" "$@"
+ver=$(go version)
+./validate-version Go "$ver" "$@"
