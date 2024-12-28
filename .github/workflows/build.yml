@@ -43,10 +43,6 @@ jobs:
           - target: java
             implementation: temurin21
           - target: javascript
-            implementation: nodejs4
-          - target: javascript
-            implementation: nodejs8
-          - target: javascript
             implementation: nodejs10
           - target: javascript
             implementation: nodejs12
