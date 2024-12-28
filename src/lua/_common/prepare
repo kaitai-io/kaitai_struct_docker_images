@@ -1,7 +1,33 @@
-#!/bin/sh -ef
+#!/bin/sh -efx
 
-export PATH=$PATH:$PWD/lua_install/bin
+# Save build packages in the `$@` array
+set -- \
+	curl \
+	gcc \
+	libc6-dev \
+	libreadline-dev \
+	make \
+	python3 \
+	unzip
 
-# Install Lua prerequisites
+# Install build packages
+apt-get install -y --no-install-recommends "$@"
+
+# Download hererocks (installer for Lua and LuaRocks)
+curl -fsSLO https://github.com/luarocks/hererocks/raw/master/hererocks.py
+
+# Install Lua and LuaRocks
+python3 hererocks.py lua_install --lua 5.3 --luarocks latest
+export PATH="$PATH":"${PWD%/}"/lua_install/bin
+
+# Install Lua dependencies that we use in
+# https://github.com/kaitai-io/kaitai_struct_tests/blob/f52bc2351f360111a94bc193a4052a0bd8c02ef3/spec/lua/run_test_suite.lua#L3-L4
 luarocks install luaunit
 luarocks install luafilesystem
+
+# Uninstall build packages
+apt-get purge -y "$@"
+apt-get autoremove -y
+
+# Install the GNU readline library that Lua needs at runtime
+apt-get install -y --no-install-recommends libreadline8

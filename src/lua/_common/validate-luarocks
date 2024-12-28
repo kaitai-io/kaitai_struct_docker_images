@@ -1,3 +1,3 @@
 #!/bin/sh -ef
 
-./validate-version LuaRocks "$(PATH=$PATH:$PWD/lua_install/bin luarocks --version)" "$@"
+./validate-version LuaRocks "$(luarocks --version)" "$@"

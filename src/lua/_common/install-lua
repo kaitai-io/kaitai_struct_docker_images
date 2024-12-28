@@ -1,8 +1,0 @@
-#!/bin/sh -ef
-
-# Preinstall hererocks, lua installer
-pip install hererocks
-
-# Install lua
-hererocks lua_install -r^ -l5.3
-export PATH=$PATH:$PWD/lua_install/bin
