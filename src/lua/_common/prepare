@@ -1,4 +1,11 @@
-#!/bin/sh -efx
+#!/bin/sh -ef
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <lua_version>" >&2
+    exit 1
+fi
+
+lua_version=$1
 
 # Save build packages in the `$@` array
 set -- \
@@ -10,6 +17,8 @@ set -- \
 	python3 \
 	unzip
 
+set -x
+
 # Install build packages
 apt-get install -y --no-install-recommends "$@"
 
@@ -17,7 +26,7 @@ apt-get install -y --no-install-recommends "$@"
 curl -fsSLO https://github.com/luarocks/hererocks/raw/master/hererocks.py
 
 # Install Lua and LuaRocks
-python3 hererocks.py lua_install --lua 5.3 --luarocks latest
+python3 hererocks.py lua_install --lua "$lua_version" --luarocks latest
 export PATH="$PATH":"${PWD%/}"/lua_install/bin
 
 # Install Lua dependencies that we use in
