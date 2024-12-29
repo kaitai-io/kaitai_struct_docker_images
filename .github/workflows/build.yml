@@ -67,7 +67,7 @@ jobs:
           - target: php
             implementation: '7.1'
           - target: php
-            implementation: '8.3'
+            implementation: '8.4'
           - target: python
             implementation: '2.7'
           - target: python
