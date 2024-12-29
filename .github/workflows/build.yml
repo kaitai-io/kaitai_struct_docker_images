@@ -12,6 +12,10 @@ jobs:
       fail-fast: false
       matrix:
         image:
+          - target: construct
+            implementation: python3.6
+          - target: construct
+            implementation: python3.13
           - target: cpp_stl
             implementation: clang3.4
           - target: cpp_stl
@@ -20,18 +24,14 @@ jobs:
             implementation: gcc4.8
           - target: cpp_stl
             implementation: gcc13
-          - target: construct
-            implementation: python3.6
-          - target: construct
-            implementation: python3.13
           - target: csharp
             implementation: net6.0
           - target: csharp
             implementation: net9.0
-          - target: graphviz
-            implementation: '12'
           - target: go
             implementation: '1.23'
+          - target: graphviz
+            implementation: '12'
           - target: java
             implementation: zulu7
           - target: java
