@@ -52,7 +52,7 @@ RUN curl -fsSLO https://archives.boost.io/release/1.81.0/source/boost_1_81_0.tar
 	rm -f boost_1_81_0.tar.bz2 && \
 	cd boost_1_81_0 && \
 	./bootstrap.sh --with-libraries=test && \
-	./b2 --with-test variant=debug link=shared install && \
+	./b2 -d0 --with-test variant=debug link=shared install && \
 	cd .. && \
 	rm -rf boost_1_81_0
 
