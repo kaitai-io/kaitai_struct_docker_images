@@ -6,7 +6,7 @@ apt-get install -y --no-install-recommends \
 
 # Install Kaitai Struct runtime
 mkdir -p /download/runtime
-git clone https://github.com/kaitai-io/kaitai_struct_php_runtime /download/runtime/php
+git clone --depth 1 https://github.com/kaitai-io/kaitai_struct_php_runtime /download/runtime/php
 
 # Install Composer
 curl https://getcomposer.org/installer -o composer-setup.php
