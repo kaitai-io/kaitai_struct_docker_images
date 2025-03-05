@@ -1,0 +1,4 @@
+#!/bin/sh -ef
+
+ver=$(make --version)
+./validate-version 'GNU Make' "$ver" "$@"

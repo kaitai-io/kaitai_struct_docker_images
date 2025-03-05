@@ -11,14 +11,40 @@ RUN apt-get update
 # Ultimately, in this image we want clang/clang++ as the only compiler,
 # but the caveat is that we temporarily need gcc to build Boost.
 
-# curl - required to download cmake
+# curl is needed to download the source code of the software to be built from
+# source.
 RUN apt-get install -y --no-install-recommends \
 	g++ \
-	make \
 	zlib1g-dev \
 	valgrind \
 	curl \
 	ruby
+
+# Install GNU Make 4 from source. We are not happy with GNU Make 3.81 that we
+# get by default on Ubuntu 14.04 (see "The Trusty Tahr" at
+# https://launchpad.net/ubuntu/+source/make-dfsg - note that "Trusty Tahr" is a
+# codename for Ubuntu 14.04), because it does not support the `--output-sync`
+# option that we want to use in
+# https://github.com/kaitai-io/kaitai_struct_tests/blob/af0359aeb87233640fcd85b57850c712b6f03f63/builder/cpp_builder.rb#L135
+#
+# Without it, messages from recipes running in parallel are often interspersed
+# even on the same lines, making it difficult to read the resulting log files.
+# See https://www.gnu.org/software/make/manual/html_node/Parallel-Output.html
+# and https://github.com/kaitai-io/ci_targets/pull/12#issue-1813540049
+RUN apt-get install -y --no-install-recommends make && \
+	curl -w '%{url_effective}\n' -fsSLO https://ftpmirror.gnu.org/make/make-4.4.1.tar.gz && \
+	sha256sum -c -w make-4.4.1.tar.gz.sha256 && \
+	tar -xzf make-4.4.1.tar.gz && \
+	rm -f make-4.4.1.tar.gz && \
+	cd make-4.4.1 && \
+	./configure && \
+	make && \
+	make install && \
+	apt-get purge -y make && \
+	cd .. && \
+	rm -rf make-4.4.1
+
+RUN ./validate-make '^GNU Make 4.4.1$'
 
 # Ubuntu 14.04 comes with ancient cmake 2.8.12.2-0ubuntu3. We don't really want
 # to keep supporting old cmake versions, nor we benefit in any way from using
