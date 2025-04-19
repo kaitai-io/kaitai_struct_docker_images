@@ -1,4 +1,4 @@
-FROM nimlang/nim:2.2.0-alpine
+FROM nimlang/nim:2.2.2-alpine
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -16,10 +16,10 @@ RUN ./prepare-alpine-init && ./prepare-alpine-ruby && ./prepare-alpine-uninit
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ nim --version
-# Nim Compiler Version 2.2.0 [Linux: amd64]
-# Compiled at 2024-10-02
-# Copyright (c) 2006-2024 by Andreas Rumpf
+# Nim Compiler Version 2.2.2 [Linux: amd64]
+# Compiled at 2025-02-06
+# Copyright (c) 2006-2025 by Andreas Rumpf
 #
-# git hash: 78983f1876726a49c69d65629ab433ea1310ece1
+# git hash: 6c34f62785263ad412f662f3e4e4bf8d8751d113
 # active boot switches: -d:release -d:danger
-RUN ./validate '^Nim Compiler Version 2\.2\.0 '
+RUN ./validate '^Nim Compiler Version 2\.2\.2 '
