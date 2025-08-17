@@ -2,8 +2,13 @@
 
 # Ruby is necessary for CI infrastructure
 apk add \
-	ruby \
-	ruby-json
+	ruby
+
+# Modern Ruby (alpine v3.22+) ships with json bundled; check if that's the case, or otherwise install it
+if ! echo 'require "json"' | ruby; then
+	echo "no json detected, installing"
+	apk add ruby-json
+fi
 
 # Modern Ruby doesn't ship by default with rexml-doc, so we check if this needs extra install
 if ! echo 'require "rexml/document"' | ruby; then
