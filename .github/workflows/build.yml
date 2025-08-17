@@ -52,7 +52,7 @@ jobs:
           - target: javascript
             implementation: nodejs18
           - target: javascript
-            implementation: nodejs22
+            implementation: nodejs24
           - target: julia
             implementation: '1.9'
           - target: lua
