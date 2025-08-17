@@ -63,7 +63,7 @@ jobs:
           - target: perl
             implementation: '5.30'
           - target: perl
-            implementation: '5.40'
+            implementation: '5.42'
           - target: php
             implementation: '7.1'
           - target: php
