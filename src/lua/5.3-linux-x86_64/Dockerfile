@@ -7,7 +7,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Install Lua, LuaRocks and our Lua dependencies
 RUN ./prepare-apt-ruby && \
-	./prepare 5.3 && \
+	./prepare 5.3 3.12 && \
 	./prepare-apt-uninit
 
 ENV PATH="$PATH:/lua_install/bin"
