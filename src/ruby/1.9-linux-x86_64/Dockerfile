@@ -1,4 +1,4 @@
-FROM ruby:1.9
+FROM corgibytes/ruby-1.9.3
 
 # Copy files common for all images
 COPY 4img/* ./
