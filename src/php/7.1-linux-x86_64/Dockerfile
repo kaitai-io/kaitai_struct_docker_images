@@ -4,8 +4,8 @@ FROM php:7.1
 COPY 4img/* ./
 
 # Update sources to use Debian archive for Buster (end-of-life)
-RUN sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list && \
-    sed -i 's/security.debian.org/archive.debian.org/g' /etc/apt/sources.list && \
+RUN sed -i 's/deb\.debian\.org/archive.debian.org/g' /etc/apt/sources.list && \
+    sed -i 's/security\.debian\.org/archive.debian.org/g' /etc/apt/sources.list && \
     sed -i '/buster-updates/d' /etc/apt/sources.list
 
 # Install all dependencies
