@@ -1,0 +1,47 @@
+#!/bin/sh -ef
+
+# See https://ziglang.org/download/community-mirrors/
+
+# From https://ziglang.org/download/
+pubkey='RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U'
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <tarball_name>" >&2
+    exit 1
+fi
+tarball_name=$1
+
+cleanup()
+{
+	rm -f shuffled_mirrors.txt "${tarball_name}" "${tarball_name}.minisig"
+}
+
+trap 'cleanup' EXIT
+
+source_query_param='?source=github-kaitai-io-kaitai_struct_docker_images'
+
+mirrors=$(curl -fsSL "https://ziglang.org/download/community-mirrors.txt$source_query_param")
+printf '%s\n' "$mirrors" | shuf -o shuffled_mirrors.txt
+
+i=0
+num_mirrors=$(wc -l < shuffled_mirrors.txt)
+
+while IFS= read -r mirror_url; do
+	i=$((i+1))
+	echo "Mirror $i/$num_mirrors: $mirror_url"
+	curl -fsSLO --url "$mirror_url/${tarball_name}${source_query_param}" || continue
+	curl -fsSLO --url "$mirror_url/${tarball_name}.minisig${source_query_param}" || continue
+	trusted_comment=$(minisign -Q -Vm "$tarball_name" -P "$pubkey") || continue
+	actual_file_field=$(printf '%s\n' "$trusted_comment" | tr '\t' '\n' | grep '^file:')
+	expected_file_field="file:$tarball_name"
+	if [ "$actual_file_field" != "$expected_file_field" ]; then
+		echo "Expected '$expected_file_field', but found '$actual_file_field'"
+		continue
+	fi
+	echo "Successfully fetched $tarball_name"
+	tar -C /usr/local -xf "$tarball_name"
+	exit 0
+done < shuffled_mirrors.txt
+
+echo "Failed to fetch $tarball_name: no working mirror found"
+exit 1

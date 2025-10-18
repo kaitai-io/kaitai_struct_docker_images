@@ -85,6 +85,8 @@ jobs:
             implementation: '3.4'
           - target: rust
             implementation: '1.89'
+          - target: zig
+            implementation: '0.15.2'
 
     steps:
       - name: Dump matrix context
