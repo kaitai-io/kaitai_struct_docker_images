@@ -49,10 +49,11 @@ RUN ./validate-make '^GNU Make 4.4.1$'
 # version of cmake.
 
 # Download the CMake binary installer and run it
-RUN curl -fsSLO https://github.com/Kitware/CMake/releases/download/v3.31.3/cmake-3.31.3-linux-x86_64.sh && \
-	chmod u+x cmake-3.31.3-linux-x86_64.sh && \
-	./cmake-3.31.3-linux-x86_64.sh --skip-license --prefix=/usr/local --exclude-subdir && \
-	rm cmake-3.31.3-linux-x86_64.sh && \
+RUN curl -fLO https://github.com/Kitware/CMake/releases/download/v4.1.2/cmake-4.1.2-linux-x86_64.sh && \
+	sha256sum -c -w cmake-4.1.2-linux-x86_64.sh.sha256 && \
+	chmod u+x cmake-4.1.2-linux-x86_64.sh && \
+	./cmake-4.1.2-linux-x86_64.sh --skip-license --prefix=/usr/local --exclude-subdir && \
+	rm -f cmake-4.1.2-linux-x86_64.sh && \
 	cmake --version
 
 # Build Boost.Test from source - see
