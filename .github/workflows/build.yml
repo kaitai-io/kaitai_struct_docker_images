@@ -18,7 +18,7 @@ jobs:
           - target: construct
             implementation: python3.6
           - target: construct
-            implementation: python3.13
+            implementation: python3.14
           - target: cpp_stl
             implementation: clang3.4
           - target: cpp_stl
