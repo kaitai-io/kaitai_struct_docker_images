@@ -77,7 +77,8 @@ RUN curl -fLO https://github.com/Kitware/CMake/releases/download/v4.1.2/cmake-4.
 # so the easiest way to avoid them is to stick with Boost 1.81 (as long as we
 # support C++98).
 
-RUN curl -fsSLO https://archives.boost.io/release/1.81.0/source/boost_1_81_0.tar.bz2 && \
+RUN curl -fLO https://archives.boost.io/release/1.81.0/source/boost_1_81_0.tar.bz2 && \
+	sha256sum -c -w boost_1_81_0.tar.bz2.sha256 && \
 	tar --bzip2 -xf boost_1_81_0.tar.bz2 && \
 	rm -f boost_1_81_0.tar.bz2 && \
 	cd boost_1_81_0 && \
