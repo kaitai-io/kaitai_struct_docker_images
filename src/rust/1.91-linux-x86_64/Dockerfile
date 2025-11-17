@@ -1,4 +1,4 @@
-FROM rust:1.89
+FROM rust:1.91
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -12,13 +12,13 @@ RUN curl -fsSL https://get.nexte.st/0.9/linux | tar xzvf - -C "${CARGO_HOME:-~/.
 # Validate that we've got correct versions, e.g. something like this:
 #
 # $ rustc --version
-# rustc 1.89.0 (29483883e 2025-08-04)
+# rustc 1.91.1 (ed61e7d7e 2025-11-07)
 # $ cargo nextest --version
-# cargo-nextest 0.9.94 (4148937af 2025-04-10)
-# release: 0.9.94
-# commit-hash: 4148937aff340f1aebee88a7b03ed0cd38f3b4ee
-# commit-date: 2025-04-10
+# cargo-nextest 0.9.113 (a996815a8 2025-11-16)
+# release: 0.9.113
+# commit-hash: a996815a861a4bad5509c57510bab58172c6691c
+# commit-date: 2025-11-16
 # host: x86_64-unknown-linux-gnu
 
-RUN ./validate-rustc '^rustc 1\.89\.'
+RUN ./validate-rustc '^rustc 1\.91\.'
 RUN ./validate-nextest '^cargo-nextest 0\.9\.'

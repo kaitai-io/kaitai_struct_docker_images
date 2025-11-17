@@ -84,7 +84,7 @@ jobs:
           - target: ruby
             implementation: '3.4'
           - target: rust
-            implementation: '1.89'
+            implementation: '1.91'
           - target: zig
             implementation: '0.15.2'
 
