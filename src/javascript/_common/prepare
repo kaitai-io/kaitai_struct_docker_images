@@ -2,16 +2,11 @@
 
 NODEJS_VERSION=$(node --version)
 
-# Mocha dropped support for Node.js...
-#
-#  - v10 in v9.0 (see https://github.com/mochajs/mocha/blob/6caa9026eb120b136dc8210614b31310f8bff83b/CHANGELOG.md#900--2021-06-07)
-#  - v12 in v10.0 (see https://github.com/mochajs/mocha/blob/6caa9026eb120b136dc8210614b31310f8bff83b/CHANGELOG.md#1000--2022-05-01)
-#
-# ..., so we'll be specifically using older versions
+# Mocha 10.0.0 dropped support for Node.js 12 (see
+# https://github.com/mochajs/mocha/blob/6caa9026eb120b136dc8210614b31310f8bff83b/CHANGELOG.md#1000--2022-05-01),
+# so we need an older version
 MOCHA_VERSION=
-if echo "$NODEJS_VERSION" | grep -q '^v10\.'; then
-	MOCHA_VERSION="@<9"
-elif echo "$NODEJS_VERSION" | grep -q '^v12\.'; then
+if echo "$NODEJS_VERSION" | grep -q '^v12\.'; then
 	MOCHA_VERSION="@<10"
 fi
 
