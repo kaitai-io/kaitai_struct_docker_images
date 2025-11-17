@@ -4,5 +4,5 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends wget
 
 # Java: poor man's maven implementation in 3 lines :)
 mkdir -p "$HOME/.m2/repository/org/testng/testng/6.9.10" "$HOME/.m2/repository/com/beust/jcommander/1.48"
-wget -O "$HOME/.m2/repository/org/testng/testng/6.9.10/testng-6.9.10.jar" https://jcenter.bintray.com/org/testng/testng/6.9.10/testng-6.9.10.jar
-wget -O "$HOME/.m2/repository/com/beust/jcommander/1.48/jcommander-1.48.jar" https://jcenter.bintray.com/com/beust/jcommander/1.48/jcommander-1.48.jar
+wget -O "$HOME/.m2/repository/org/testng/testng/6.9.10/testng-6.9.10.jar" https://repo1.maven.org/maven2/org/testng/testng/6.9.10/testng-6.9.10.jar
+wget -O "$HOME/.m2/repository/com/beust/jcommander/1.48/jcommander-1.48.jar" https://repo1.maven.org/maven2/com/beust/jcommander/1.48/jcommander-1.48.jar
