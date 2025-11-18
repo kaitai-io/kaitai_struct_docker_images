@@ -36,8 +36,6 @@ jobs:
           - target: graphviz
             implementation: '12'
           - target: java
-            implementation: zulu7
-          - target: java
             implementation: temurin8
           - target: java
             implementation: temurin11
