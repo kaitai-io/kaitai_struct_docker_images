@@ -8,6 +8,13 @@ on:
     # Run every Saturday at 3:17 AM UTC
     - cron: '17 3 * * 6'
 
+# Cancel in-progress runs of the same workflow
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
 jobs:
   linux-x86_64:
     runs-on: ubuntu-latest
@@ -86,6 +93,12 @@ jobs:
           - target: zig
             implementation: '0.15.2'
 
+    permissions:
+      contents: read
+      packages: write  # Needed to publish Docker images to GitHub Packages
+    env:
+      TARGET: ${{ matrix.image.target }}
+      IMPL: ${{ matrix.image.implementation }}
     steps:
       - name: Dump matrix context
         env:
@@ -93,16 +106,20 @@ jobs:
         run: echo "$MATRIX_CONTEXT"
       - name: checkout
         uses: actions/checkout@v5
+        with:
+          persist-credentials: false
       - name: build
         run: |
-          cd "src/${{ matrix.image.target }}/${{ matrix.image.implementation }}-linux-x86_64"
+          cd "src/$TARGET/$IMPL-linux-x86_64"
           ./build
       - name: login
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          echo "$GH_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
       - name: tag
         run: |
-          docker tag "kaitai-${{ matrix.image.target }}-${{ matrix.image.implementation }}-linux-x86_64" "ghcr.io/kaitai-io/kaitai-${{ matrix.image.target }}-${{ matrix.image.implementation }}-linux-x86_64:latest"
+          docker tag "kaitai-$TARGET-$IMPL-linux-x86_64" "ghcr.io/kaitai-io/kaitai-$TARGET-$IMPL-linux-x86_64:latest"
       - name: publish
         run: |
-          docker push "ghcr.io/kaitai-io/kaitai-${{ matrix.image.target }}-${{ matrix.image.implementation }}-linux-x86_64:latest"
+          docker push "ghcr.io/kaitai-io/kaitai-$TARGET-$IMPL-linux-x86_64:latest"
