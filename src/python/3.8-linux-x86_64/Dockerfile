@@ -1,4 +1,4 @@
-FROM python:3.4-alpine
+FROM python:3.8-alpine
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -10,6 +10,6 @@ RUN ./prepare-alpine-init && ./prepare-alpine-ruby && ./prepare-alpine-uninit
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ python --version
-# Python 3.4.10
+# Python 3.8.20
 
-RUN ./validate '^Python 3\.4\.'
+RUN ./validate '^Python 3\.8\.'
