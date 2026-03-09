@@ -1,4 +1,4 @@
-FROM ruby:3.4
+FROM ruby:4.0
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -9,6 +9,6 @@ RUN ./prepare
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ ruby --version
-# ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [x86_64-linux]
+# ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]
 
-RUN ./validate '^ruby 3\.4\.'
+RUN ./validate '^ruby 4\.0\.'
