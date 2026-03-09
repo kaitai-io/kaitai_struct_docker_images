@@ -1,4 +1,4 @@
-FROM nimlang/nim:1.6.20-alpine
+FROM nimlang/nim:1.6.20
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -11,7 +11,7 @@ RUN nimble install -y testify
 RUN ln -s $(nimble path testify)/testify /usr/local/bin
 
 # Install ruby for post-run aggregation
-RUN ./prepare-alpine-init && ./prepare-alpine-ruby && ./prepare-alpine-uninit
+RUN ./prepare-apt-ruby && ./prepare-apt-uninit
 
 # Validate that we've got correct version, e.g. something like this:
 #
