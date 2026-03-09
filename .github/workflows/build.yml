@@ -67,7 +67,7 @@ jobs:
           - target: nim
             implementation: '1.6.20'
           - target: nim
-            implementation: '2.2.6'
+            implementation: '2.2.8'
           - target: perl
             implementation: '5.30'
           - target: perl
