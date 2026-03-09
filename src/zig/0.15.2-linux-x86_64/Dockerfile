@@ -1,4 +1,4 @@
-FROM alpine:3.22
+FROM alpine:3.23
 
 # Copy files common for all images
 COPY 4img/* ./
