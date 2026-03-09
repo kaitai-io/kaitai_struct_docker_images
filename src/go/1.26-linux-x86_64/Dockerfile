@@ -3,18 +3,14 @@ FROM golang:1.26-alpine
 # Copy files common for all images
 COPY 4img/* ./
 
-RUN ./prepare-alpine-init
-
-# Ruby is required for test infrastructure (aggregators, test result converters) to work
-RUN ./prepare-alpine-ruby
-
-# Required to download go-junit-report release in ./prepare
-RUN apk add curl
-
-# Required for `go get` to work
-RUN apk add git
-
-RUN ./prepare-alpine-uninit
+# * Ruby is required for test infrastructure (aggregators, test result converters) to work
+# * `curl` is used in src/go/_common/prepare
+# * `git` is used in src/go/_common/prepare
+RUN \
+	./prepare-alpine-init && \
+	./prepare-alpine-ruby && \
+	apk add curl git && \
+	./prepare-alpine-uninit
 
 # Install rest of go-specific dependencies
 RUN ./prepare
