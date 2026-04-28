@@ -1,10 +1,12 @@
-FROM rust:1.95
+FROM rust:1.95-slim
 
 # Copy files common for all images
 COPY 4img/* ./
 
 # Install all dependencies
-RUN ./prepare-apt-ruby && ./prepare-apt-uninit
+RUN ./prepare-apt-ruby && \
+	apt-get install -y --no-install-recommends git curl && \
+	./prepare-apt-uninit
 RUN ./prepare
 # See https://nexte.st/docs/installation/pre-built-binaries/#downloading-and-installing-from-your-terminal
 RUN curl -fsSL https://get.nexte.st/0.9/linux | tar xzvf - -C "${CARGO_HOME:-~/.cargo}"/bin
