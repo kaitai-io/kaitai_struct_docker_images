@@ -64,6 +64,8 @@ jobs:
             implementation: '5.3'
           - target: lua
             implementation: '5.4'
+          - target: lua
+            implementation: '5.5'
           - target: nim
             implementation: '1.6.20'
           - target: nim
