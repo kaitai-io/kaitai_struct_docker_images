@@ -1,4 +1,4 @@
 #!/bin/sh -ef
 
 ver=$(cargo nextest --version)
-./validate-version nextest "$ver" "$@"
+./validate-version cargo-nextest "$ver" "$@"

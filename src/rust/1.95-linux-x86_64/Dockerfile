@@ -7,9 +7,8 @@ COPY 4img/* ./
 RUN ./prepare-apt-ruby && \
 	apt-get install -y --no-install-recommends git curl && \
 	./prepare-apt-uninit
-RUN ./prepare
-# See https://nexte.st/docs/installation/pre-built-binaries/#downloading-and-installing-from-your-terminal
-RUN curl -fsSL https://get.nexte.st/0.9/linux | tar xzvf - -C "${CARGO_HOME:-~/.cargo}"/bin
+RUN ./prepare-runtime-deps
+RUN ./prepare-nextest
 
 # Validate that we've got correct versions, e.g. something like this:
 #

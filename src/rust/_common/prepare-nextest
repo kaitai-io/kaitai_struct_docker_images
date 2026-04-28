@@ -1,0 +1,19 @@
+#!/bin/sh -ef
+
+# See https://nexte.st/docs/installation/pre-built-binaries/#downloading-and-installing-from-your-terminal
+nextest_release_url=$(curl -o /dev/null --head -w '%{redirect_url}' -fsS https://get.nexte.st/0.9/linux)
+
+if [ "${nextest_release_url#https://}" = "$nextest_release_url" ]; then
+	echo "Invalid redirect URL: '$nextest_release_url' does not start with https://"
+	exit 1
+fi
+
+echo "Downloading $nextest_release_url"
+
+curl -fsSL -o cargo-nextest-0.9.x-linux.tar.gz --url "$nextest_release_url"
+
+# Print the SHA-256 hash for manual inspection of the build log
+sha256sum cargo-nextest-0.9.x-linux.tar.gz
+
+tar -xzvf cargo-nextest-0.9.x-linux.tar.gz -C "${CARGO_HOME:-~/.cargo}"/bin
+rm -f cargo-nextest-0.9.x-linux.tar.gz
