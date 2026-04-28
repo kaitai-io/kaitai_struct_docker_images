@@ -1,4 +1,4 @@
-FROM nimlang/nim:2.2.8
+FROM nimlang/nim:2.2.10
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -16,10 +16,10 @@ RUN ./prepare-apt-ruby && ./prepare-apt-uninit
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ nim --version
-# Nim Compiler Version 2.2.8 [Linux: amd64]
-# Compiled at 2026-02-23
+# Nim Compiler Version 2.2.10 [Linux: amd64]
+# Compiled at 2026-04-24
 # Copyright (c) 2006-2026 by Andreas Rumpf
 #
-# git hash: 4f500679b196fad944caa50a753f5bbfaefda001
-# active boot switches: -d:release -d:danger
-RUN ./validate '^Nim Compiler Version 2\.2\.8 '
+# git hash: bfeb3146d1638b39f69007a4ae5a23e23ae4e5ef
+# active boot switches: -d:release
+RUN ./validate '^Nim Compiler Version 2\.2\.10 '
