@@ -1,4 +1,4 @@
-FROM nimlang/nim:2.2.10
+FROM nim:2.2.10
 
 # Copy files common for all images
 COPY 4img/* ./
