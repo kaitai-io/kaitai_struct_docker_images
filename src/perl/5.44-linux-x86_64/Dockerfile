@@ -1,5 +1,5 @@
 # Can't use "slim" container, because we use XML-Simple, which requires gcc to build
-FROM perl:5.42
+FROM perl:5.44
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -15,9 +15,9 @@ RUN ./prepare
 #
 # $ perl --version
 #
-# This is perl 5, version 42, subversion 0 (v5.42.0) built for x86_64-linux-gnu
+# This is perl 5, version 44, subversion 0 (v5.44.0) built for x86_64-linux-gnu
 #
-# Copyright 1987-2025, Larry Wall
+# Copyright 1987-2026, Larry Wall
 # ...
 
-RUN ./validate '^This is perl 5, version 42,'
+RUN ./validate '^This is perl 5, version 44,'
