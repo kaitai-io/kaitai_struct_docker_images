@@ -71,8 +71,6 @@ jobs:
           - target: nim
             implementation: '2.2.12'
           - target: perl
-            implementation: '5.30'
-          - target: perl
             implementation: '5.44'
           - target: php
             implementation: '7.1'
