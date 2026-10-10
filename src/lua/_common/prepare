@@ -24,7 +24,7 @@ set -x
 apt-get install -y --no-install-recommends "$@"
 
 # Download hererocks (installer for Lua and LuaRocks)
-curl -fsSLO https://github.com/luarocks/hererocks/raw/master/hererocks.py
+curl -fsSLO https://github.com/luarocks/hererocks/raw/5d77b0bafc8b96f82355ca2ce5637c00d78a065c/hererocks.py
 
 # Install Lua and LuaRocks
 python3 hererocks.py lua_install --lua "$lua_version" --luarocks "$luarocks_version"
