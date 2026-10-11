@@ -17,5 +17,5 @@ nextest_tarball=cargo-nextest-${nextest_version}-x86_64-unknown-linux-gnu.tar.gz
 curl -fsSL -o "${nextest_tarball}" "https://get.nexte.st/${nextest_version}/x86_64-unknown-linux-gnu.tar.gz"
 sha256sum -c -w "${nextest_tarball}.sha256"
 
-tar -xzvf "${nextest_tarball}" -C "${CARGO_HOME:-~/.cargo}"/bin
+tar -xzvf "${nextest_tarball}" -C "${CARGO_HOME:-$HOME/.cargo}"/bin
 rm -f "${nextest_tarball}"
