@@ -12,7 +12,17 @@ go mod download
 )
 rm -rf /download
 
-# Install https://github.com/jstemmer/go-junit-report
-curl -fsSL https://github.com/jstemmer/go-junit-report/releases/download/v2.1.0/go-junit-report-v2.1.0-linux-amd64.tar.gz | tar xzvf -
+# Install https://github.com/jstemmer/go-junit-report. The SHA-256 hash of the
+# release tarball was verified by rebuilding the `go-junit-report` binary it
+# contains from the v2.1.0 tag (using the Go version and build flags embedded in
+# the binary, see `go version -m go-junit-report`), which reproduced it
+# byte for byte. At the time of verification, the v2.1.0 tag pointed to commit
+# https://github.com/jstemmer/go-junit-report/commit/14d61e6e75e3f3c74551d757ad936e8e88014464
+# (also embedded in the binary as `vcs.revision`). If the tag points elsewhere
+# now, treat it as a red flag.
+curl -fsSLO https://github.com/jstemmer/go-junit-report/releases/download/v2.1.0/go-junit-report-v2.1.0-linux-amd64.tar.gz
+sha256sum -c -w go-junit-report-v2.1.0-linux-amd64.tar.gz.sha256
+tar -xzvf go-junit-report-v2.1.0-linux-amd64.tar.gz
+rm -f go-junit-report-v2.1.0-linux-amd64.tar.gz
 install -t /usr/local/bin go-junit-report
 rm -f go-junit-report
