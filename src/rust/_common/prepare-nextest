@@ -1,19 +1,21 @@
 #!/bin/sh -ef
 
-# See https://nexte.st/docs/installation/pre-built-binaries/#downloading-and-installing-from-your-terminal
-nextest_release_url=$(curl -o /dev/null --head -w '%{redirect_url}' -fsS https://get.nexte.st/0.9/linux)
+nextest_version=0.9.148
+nextest_tarball=cargo-nextest-${nextest_version}-x86_64-unknown-linux-gnu.tar.gz
 
-if [ "${nextest_release_url#https://}" = "$nextest_release_url" ]; then
-	echo "Invalid redirect URL: '$nextest_release_url' does not start with https://"
-	exit 1
-fi
+# Download a specific release, see
+# https://nexte.st/docs/installation/release-urls/#version-identifier, and check
+# its SHA-256 hash against a `${nextest_tarball}.sha256` file. The hash in this
+# file was verified as follows:
+#
+# 1. It matches the `.sha256` file published next to the tarball in the GitHub
+#    release at https://github.com/nextest-rs/nextest/releases.
+# 2. It matches the hash printed in the log of the CI job that built the
+#    tarball (the "Build cargo-nextest binaries for x86_64-unknown-linux-gnu"
+#    job of the release workflow run for the `cargo-nextest-${nextest_version}`
+#    tag at https://github.com/nextest-rs/nextest/actions/workflows/release.yml).
+curl -fsSL -o "${nextest_tarball}" "https://get.nexte.st/${nextest_version}/x86_64-unknown-linux-gnu.tar.gz"
+sha256sum -c -w "${nextest_tarball}.sha256"
 
-echo "Downloading $nextest_release_url"
-
-curl -fsSL -o cargo-nextest-0.9.x-linux.tar.gz --url "$nextest_release_url"
-
-# Print the SHA-256 hash for manual inspection of the build log
-sha256sum cargo-nextest-0.9.x-linux.tar.gz
-
-tar -xzvf cargo-nextest-0.9.x-linux.tar.gz -C "${CARGO_HOME:-~/.cargo}"/bin
-rm -f cargo-nextest-0.9.x-linux.tar.gz
+tar -xzvf "${nextest_tarball}" -C "${CARGO_HOME:-~/.cargo}"/bin
+rm -f "${nextest_tarball}"
