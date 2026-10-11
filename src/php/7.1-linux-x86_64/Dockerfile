@@ -10,7 +10,7 @@ RUN sed -i 's/deb\.debian\.org/archive.debian.org/g' /etc/apt/sources.list && \
 
 # Install all dependencies
 RUN ./prepare-apt-ruby
-RUN ./prepare
+RUN ./prepare 7.1
 
 # Validate that we've got correct version, e.g. something like this:
 #

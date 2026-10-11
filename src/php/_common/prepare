@@ -1,5 +1,39 @@
 #!/bin/sh -ef
 
+usage()
+{
+	echo "Usage: $0 <php-version>"
+	echo
+	echo '  <php-version>  PHP version of the image (supported: 7.1, 8.5)'
+}
+
+die()
+{
+	printf '%s\n' "$1" >&2
+	printf '\n%s\n' "$(usage)" >&2
+	exit 1
+}
+
+php_version=$1
+if [ -z "$php_version" ]; then
+	die 'Error: <php-version> must not be empty'
+fi
+
+case $php_version in
+	7.1)
+		# Composer 2.2 (LTS) is the last version supporting PHP < 7.2.5, see
+		# https://getcomposer.org/doc/00-intro.md#system-requirements
+		composer_version=2.2.30
+		;;
+	8.5)
+		# The latest stable version at the time of writing
+		composer_version=2.10.3
+		;;
+	*)
+		die "Error: unsupported value $1 of <php-version>"
+		;;
+esac
+
 apt-get install -y --no-install-recommends \
 	git \
 	unzip
@@ -8,10 +42,40 @@ apt-get install -y --no-install-recommends \
 mkdir -p /download/runtime
 git clone --depth 1 https://github.com/kaitai-io/kaitai_struct_php_runtime /download/runtime/php
 
-# Install Composer
-curl https://getcomposer.org/installer -o composer-setup.php
-php ./composer-setup.php
-mv composer.phar /usr/local/bin/composer
+# Install Composer. Instead of running the https://getcomposer.org/installer
+# script, we download a specific `composer.phar` release (as described in
+# https://getcomposer.org/download/#manual-download) and check its SHA-256
+# hash against a `composer-${composer_version}.phar.sha256` file. The hashes
+# in these files were verified as follows:
+#
+# 1. They match the `composer.phar.sha256sum` files published at
+#    https://getcomposer.org/download/#manual-download and the `composer.phar`
+#    assets of the GitHub releases at
+#    https://github.com/composer/composer/releases.
+# 2. `gh attestation verify --repo composer/composer composer.phar` confirmed
+#    that `composer.phar` was built by Composer's release workflow from the
+#    respective tag, see
+#    https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md#using-the-github-cli-util-gh-
+# 3. The `composer.phar.sig` signature (published next to `composer.phar` as
+#    `https://getcomposer.org/download/<version>/composer.phar.sig`, but not
+#    linked from the download page) is valid for the "Tags Public Key" from
+#    https://composer.github.io/pubkeys.html (also available as
+#    https://composer.github.io/releases.pub). This is the check that the
+#    installer and `composer self-update` perform:
+#
+#    ```sh
+#    jq -r .sha384 composer.phar.sig | base64 -d > composer.phar.sig.bin
+#    openssl dgst -sha384 -verify releases.pub -signature composer.phar.sig.bin composer.phar
+#    ```
+#
+# 4. The `composer.phar.asc` GPG signature is valid for the key
+#    161DFBE342889F01DDAC4E61CBB3D576F2A0946F. This key isn't documented, but
+#    Composer's release workflow uses it for signing, see
+#    https://github.com/composer/composer/blob/f0de0bf90226853b841672f086d8b58b02332504/.github/workflows/release.yml#L54-L63
+curl -fsSL -o "composer-${composer_version}.phar" "https://getcomposer.org/download/${composer_version}/composer.phar"
+sha256sum -c -w "composer-${composer_version}.phar.sha256"
+install "composer-${composer_version}.phar" /usr/local/bin/composer
+rm -f "composer-${composer_version}.phar"
 
 # Install runtime's dependencies: result is in /download/runtime/php/vendor.
 cd /download/runtime/php

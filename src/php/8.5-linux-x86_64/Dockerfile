@@ -5,7 +5,7 @@ COPY 4img/* ./
 
 # Install all dependencies
 RUN ./prepare-apt-ruby
-RUN ./prepare
+RUN ./prepare 8.5
 
 # Validate that we've got correct version, e.g. something like this:
 #
