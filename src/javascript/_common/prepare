@@ -25,7 +25,7 @@ npm install -g \
 #
 # 1. Publish a new version to npm with the @next tag. In practice, this just
 #    means pushing a tag in [this
-#    format](https://github.com/kaitai-io/kaitai_struct_javascript_runtime/blob/2acb0d8b09fde9c95fc77ee3019f6d6b1c73f040/.github/workflows/build.yml#L6)
+#    format](https://github.com/kaitai-io/kaitai_struct_javascript_runtime/blob/f04a0295e12143d1ecc7c8cd0df877238c89de6f/.github/workflows/publish.yml#L6)
 #    to GitHub, which will trigger `npm publish --tag next` automatically.
 # 2. Trigger the CI workflow in
 #    https://github.com/kaitai-io/kaitai_struct_docker_images to rebuild the
