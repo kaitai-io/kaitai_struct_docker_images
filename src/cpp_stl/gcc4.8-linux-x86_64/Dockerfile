@@ -29,7 +29,7 @@ RUN apt-get install -y --no-install-recommends \
 # See https://www.gnu.org/software/make/manual/html_node/Parallel-Output.html
 # and https://github.com/kaitai-io/ci_targets/pull/12#issue-1813540049
 RUN apt-get install -y --no-install-recommends make && \
-	curl -w '%{url_effective}\n' -fsSLO https://ftpmirror.gnu.org/make/make-4.4.1.tar.gz && \
+	curl --insecure -w '%{url_effective}\n' -fsSLO https://ftpmirror.gnu.org/make/make-4.4.1.tar.gz && \
 	sha256sum -c -w make-4.4.1.tar.gz.sha256 && \
 	tar -xzf make-4.4.1.tar.gz && \
 	rm -f make-4.4.1.tar.gz && \
@@ -49,7 +49,7 @@ RUN ./validate-make '^GNU Make 4.4.1$'
 # version of cmake.
 
 # Download the CMake binary installer and run it
-RUN curl -fLO https://github.com/Kitware/CMake/releases/download/v4.1.2/cmake-4.1.2-linux-x86_64.sh && \
+RUN curl --insecure -fLO https://github.com/Kitware/CMake/releases/download/v4.1.2/cmake-4.1.2-linux-x86_64.sh && \
 	sha256sum -c -w cmake-4.1.2-linux-x86_64.sh.sha256 && \
 	chmod u+x cmake-4.1.2-linux-x86_64.sh && \
 	./cmake-4.1.2-linux-x86_64.sh --skip-license --prefix=/usr/local --exclude-subdir && \
@@ -74,7 +74,7 @@ RUN curl -fLO https://github.com/Kitware/CMake/releases/download/v4.1.2/cmake-4.
 # so the easiest way to avoid them is to stick with Boost 1.81 (as long as we
 # support C++98).
 
-RUN curl -fLO https://archives.boost.io/release/1.81.0/source/boost_1_81_0.tar.bz2 && \
+RUN curl --insecure -fLO https://archives.boost.io/release/1.81.0/source/boost_1_81_0.tar.bz2 && \
 	sha256sum -c -w boost_1_81_0.tar.bz2.sha256 && \
 	tar --bzip2 -xf boost_1_81_0.tar.bz2 && \
 	rm -f boost_1_81_0.tar.bz2 && \
