@@ -1,4 +1,4 @@
-FROM rust:1.95-slim
+FROM rust:1.99-slim
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -13,14 +13,14 @@ RUN ./prepare-nextest
 # Validate that we've got correct versions, e.g. something like this:
 #
 # $ rustc --version
-# rustc 1.95.0 (59807616e 2026-04-14)
+# rustc 1.99.1 (58cf8f9c3 2026-10-13)
 #
 # $ cargo nextest --version
-# cargo-nextest 0.9.133 (65e806bd5 2026-04-14)
-# release: 0.9.133
-# commit-hash: 65e806bd589d12c4341d3696a02a9788bd437c3c
-# commit-date: 2026-04-14
+# cargo-nextest 0.9.148 (cd1d6d546 2026-10-07)
+# release: 0.9.148
+# commit-hash: cd1d6d5467322dbc0d39a80cb671d000ac302798
+# commit-date: 2026-10-07
 # host: x86_64-unknown-linux-gnu
 
-RUN ./validate-rustc '^rustc 1\.95\.'
+RUN ./validate-rustc '^rustc 1\.99\.'
 RUN ./validate-nextest '^cargo-nextest 0\.9\.'
