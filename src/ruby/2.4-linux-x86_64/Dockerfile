@@ -1,4 +1,4 @@
-FROM ruby:2.4
+FROM ruby:2.4-slim
 
 # Copy files common for all images
 COPY 4img/* ./
