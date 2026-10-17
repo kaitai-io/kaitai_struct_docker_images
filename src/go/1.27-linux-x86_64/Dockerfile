@@ -1,4 +1,4 @@
-FROM golang:1.26-alpine
+FROM golang:1.27-alpine
 
 # Copy files common for all images
 COPY 4img/* ./
@@ -18,9 +18,9 @@ RUN ./prepare
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ go version
-# go version go1.26.1 linux/amd64
+# go version go1.27.2 linux/amd64
 
-RUN ./validate '^go version go1\.26\.'
+RUN ./validate '^go version go1\.27\.'
 
 # Prevent Go from accessing the network (see https://go.dev/ref/mod#resolve-pkg-mod)
 ENV GOPROXY=off
