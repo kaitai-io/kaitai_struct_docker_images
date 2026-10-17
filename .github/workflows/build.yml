@@ -79,7 +79,7 @@ jobs:
           - target: python
             implementation: '3.8'
           - target: python
-            implementation: '3.14'
+            implementation: '3.15'
           - target: ruby
             implementation: '2.4'
           - target: ruby
