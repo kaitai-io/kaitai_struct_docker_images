@@ -1,7 +1,29 @@
 #!/bin/sh -ef
 
+# Save build packages in the `$@` array. XML::Simple depends (via
+# XML::SAX::Expat) on XML::Parser, which is an XS module that needs a C
+# compiler and Expat headers to build.
+set -- \
+	gcc \
+	libexpat1-dev
+
+set -x
+
+# Install build packages
+apt-get install -y --no-install-recommends "$@"
+
 cpanm Test::Class
 cpanm Test::Deep
 cpanm XML::Simple
 cpanm Module::Build
 cpanm TAP::Harness::JUnit
+
+# Remove cpanm build directories and logs
+rm -rf ~/.cpanm
+
+# Uninstall build packages
+apt-get purge -y "$@"
+apt-get autoremove -y
+
+# Install the Expat library that XML::Parser needs at runtime
+apt-get install -y --no-install-recommends libexpat1

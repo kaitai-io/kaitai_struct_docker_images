@@ -1,15 +1,13 @@
-# Can't use "slim" container, because we use XML-Simple, which requires gcc to build
-FROM perl:5.44
+FROM perl:5.44-slim
 
 # Copy files common for all images
 COPY 4img/* ./
 
-# Ruby is required for test infrastructure (aggregators, test result converters) to work
+# Ruby is required for test infrastructure (aggregators, test result converters) to work.
+# `prepare` installs Perl dependencies and needs apt lists, so it runs between these.
 RUN ./prepare-apt-ruby && \
+	./prepare && \
 	./prepare-apt-uninit
-
-# Install Perl dependencies
-RUN ./prepare
 
 # Validate that we've got correct version, e.g. something like this:
 #
