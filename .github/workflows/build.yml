@@ -87,7 +87,7 @@ jobs:
           - target: rust
             implementation: '1.99'
           - target: zig
-            implementation: '0.15.2'
+            implementation: '0.16.0'
 
     permissions:
       contents: read

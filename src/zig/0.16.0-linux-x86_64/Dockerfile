@@ -11,14 +11,14 @@ RUN \
 	./prepare-alpine-uninit
 
 # Download Zig
-RUN ./prepare 'zig-x86_64-linux-0.15.2.tar.xz'
+RUN ./prepare 'zig-x86_64-linux-0.16.0.tar.xz'
 
 # Add the `zig` binary to PATH
-ENV PATH="$PATH:/usr/local/zig-x86_64-linux-0.15.2"
+ENV PATH="$PATH:/usr/local/zig-x86_64-linux-0.16.0"
 
 # Validate that we've got correct version, e.g. something like this:
 #
 # $ zig version
-# 0.15.2
+# 0.16.0
 
-RUN ./validate '^0\.15\.2$'
+RUN ./validate '^0\.16\.0$'
